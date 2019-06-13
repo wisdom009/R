@@ -1,0 +1,3 @@
+setwd("d:/workspace/R_date/part3/date")
+
+setwd("D:/workspace/R_date/Part2(비정형데이터)/P01_Seoul_Response")

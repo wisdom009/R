@@ -1,0 +1,91 @@
+---
+title: "과제"
+author: "park"
+date: '2019 6 11 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(ggplot2)
+
+```
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r mpg}
+
+ggplot(mpg, aes(x=cty, y=hwy)) +
+  geom_point(size=3, color='blue') +
+  ggtitle('cty와hwy산점도')
+```
+
+
+
+```{r midwest}
+
+mw <- midwest %>%
+  filter(poptotal <= 500000 && popasian <= 10000)
+options(scipen = 10)
+ggplot(mw, aes(x=poptotal, y=popasian)) +
+  geom_point() +
+  xlim(0,500000) + ylim(0,10000)
+```
+```{r}
+mpg3=mpg %>%
+  filter(class == 'suv') %>%
+  group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
+  arrange(desc(mean_cty)) %>%
+  head(5)
+
+ggplot(mpg3, aes(x=reorder(manufacturer, -mean_cty), y=mean_cty,
+                   fill=manufacturer)) +
+  geom_col()
+```
+```{r}
+ggplot(mpg, aes(x=class, fill=class)) +
+  geom_bar()
+
+```
+```{r economics}
+economics
+
+ggplot(economics, aes(x=date, y=psavert))+
+  geom_line() 
+
+```
+```{r}
+mpg
+mpg2 = mpg %>%
+  group_by(class) %>%
+  select(cty,class) %>%
+  filter(class %in% c('compact','subcompact','suv'))
+
+mpg2
+ggplot(mpg2, aes(x = class, y = cty)) + geom_boxplot(fill=c("blue","green","red"))
+```
+```{r diamonds}
+ggplot(diamonds, aes(x=cut, fill=cut)) + geom_bar()
+
+```
+
+
+```{r}
+dd= diamonds %>%
+  group_by(cut) %>%
+  summarise(mean_price=mean(price))
+
+ggplot(dd, aes(x=cut, y=mean_price, fill=cut)) +
+  geom_col()
+```
+
+
+
