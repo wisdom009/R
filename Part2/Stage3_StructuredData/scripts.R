@@ -133,5 +133,4 @@ ggplot(bb, aes(x=선수명, y=연봉대비출루율)) +
   theme(plot.title = element_text(face = "bold", hjust = 0.5, 
                                   size = 15, color = "darkblue")) +
   geom_hline(yintercept=mean_obp, color='purple', linetype = 'dashed') 
-  
 
