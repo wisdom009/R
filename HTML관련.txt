@@ -1,0 +1,7 @@
+combo <- gvisComboChart(korean,options=list(seriesType="bars", 
+                                            height=400,weight=500,
+                                            series='{3: {type:"line"}}'))
+header <- combo$html$header
+header <- gsub("charset=utf-8", "charset=euc-kr", header)
+combo$html$header <- header
+
